@@ -47,9 +47,6 @@ public class OrgsRoleService {
         if (updaterRole.getRoleName() == OrgRoles.admin && updaterUserId.equals(targetUserId)) {
             throw new AccessDeniedException("Admin cannot update their own role");
         }
-
-
-
         Roles targetRole = orgRolesRepository
                 .findByUserIdAndOrgId(targetUserId, orgId)
                 .orElseThrow(() -> new RuntimeException("Target role not found"));

@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.Callable;
+
 @RestController()
 @RequestMapping("/orgs")
-public class OrgsController {
+public class OrgsController{
+
 
     private OrgsService orgsService;
 
@@ -30,10 +33,20 @@ public class OrgsController {
        return ResponseEntity.ok( new CreateResponse(
                orgs.getId(),
                orgs.getName(),
-               "You've created an Orgs"
-               )
+               "You've created an Orgs")
 
        );
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<?> update(@AuthenticationPrincipal User user, @RequestBody UpdateRequest req) {
+        Orgs orgs =  orgsService.updateOrgsService(
+                user.getId(),
+                req.orgId(),
+                req.name(),
+                req.description()
+        );
+        return ResponseEntity.ok("Updated Orgs");
     }
 
 }

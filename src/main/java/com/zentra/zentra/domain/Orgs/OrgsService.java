@@ -26,6 +26,9 @@ public class OrgsService {
 
     public Orgs updateOrgsService(UUID updaterId, UUID orgID, Optional<String> name, Optional<String> description){
         Orgs orgs = orgsRepository.findById(orgID).orElseThrow(() -> new AccessDeniedException("Org not found"));
+        if (!(orgsRoleService.findUserRole(updaterId, orgID).equals(OrgRoles.owner))){
+            throw new AccessDeniedException("Only owner can update orgs information");
+        }
         name.ifPresent(orgs::setName);
         description.ifPresent(orgs::setDescription);
         return orgsRepository.save(orgs);
