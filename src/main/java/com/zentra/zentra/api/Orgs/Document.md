@@ -88,7 +88,7 @@ Update an existing organization owned by the authenticated user.
 
 Endpoint:
 ```
-POST /orgs/update
+PUT /orgs/update
 ```
 
 Authentication:
@@ -116,8 +116,30 @@ Request Fields:
 ---
 
 Success Response – 200 OK:
+---
+
 ```
-Updated Orgs
+GET /orgs/{org_id}
+```
+
+Authentication:
+- Required
+
+Response Body:
+```json
+{
+  "orgId": "550e8400-e29b-41d4-a716-446655440000",
+  "name": "Zentra Updated",
+  "description": "Updated description"
+}
+```
+
+
+
+
+
+```
+
 ```
 
 ---

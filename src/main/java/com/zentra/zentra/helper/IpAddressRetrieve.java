@@ -1,4 +1,4 @@
-package com.zentra.zentra.config;
+package com.zentra.zentra.helper;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;

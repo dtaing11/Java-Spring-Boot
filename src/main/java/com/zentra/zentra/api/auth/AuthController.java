@@ -1,6 +1,6 @@
 package com.zentra.zentra.api.auth;
 
-import com.zentra.zentra.config.IpAddressRetrieve;
+import com.zentra.zentra.helper.IpAddressRetrieve;
 import com.zentra.zentra.domain.Auth.AuthService;
 import com.zentra.zentra.domain.Auth.UserSession;
 import jakarta.servlet.http.HttpServletRequest;
