@@ -4,6 +4,7 @@ import com.zentra.zentra.domain.Orgs.roles.OrgRoles;
 import com.zentra.zentra.domain.Orgs.roles.OrgRolesRepository;
 import com.zentra.zentra.domain.Orgs.roles.OrgsRoleService;
 import com.zentra.zentra.domain.Orgs.roles.Roles;
+import jakarta.transaction.Transactional;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +19,9 @@ public class OrgsService {
     private OrgsRoleService orgsRoleService;
 
     private OrgRolesRepository orgRolesRepository;
-    public OrgsService(OrgsRepository orgsRepository, OrgRolesRepository orgRolesRepository) {
+    public OrgsService(OrgsRepository orgsRepository, OrgsRoleService orgsRoleService) {
         this.orgsRepository = orgsRepository;
-        this.orgRolesRepository = orgRolesRepository;
+        this.orgsRoleService = orgsRoleService;
 
     }
 
@@ -33,6 +34,7 @@ public class OrgsService {
         description.ifPresent(orgs::setDescription);
         return orgsRepository.save(orgs);
     }
+    @Transactional
     public Orgs createOrgsService(UUID userId, String name, Optional<String> description ) {
         String descriptions = description.orElse(null);
 

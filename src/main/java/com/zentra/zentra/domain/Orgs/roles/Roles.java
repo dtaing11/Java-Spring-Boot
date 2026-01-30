@@ -3,6 +3,9 @@ package com.zentra.zentra.domain.Orgs.roles;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.Type;
+import org.hibernate.type.SqlTypes;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -18,6 +21,8 @@ public class Roles {
     @GeneratedValue
     private UUID id;
     @Column(name="org_role", columnDefinition="roles", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     private OrgRoles roleName;
     @Column(name= "user_id", nullable = false)
     private UUID userId;
