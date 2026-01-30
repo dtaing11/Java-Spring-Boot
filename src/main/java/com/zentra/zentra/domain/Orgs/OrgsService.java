@@ -25,6 +25,11 @@ public class OrgsService {
 
     }
 
+    public Orgs findById(UUID id) {
+        return orgsRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Orgs not found"));
+    }
+
+
     public Orgs updateOrgsService(UUID updaterId, UUID orgID, Optional<String> name, Optional<String> description){
         Orgs orgs = orgsRepository.findById(orgID).orElseThrow(() -> new AccessDeniedException("Org not found"));
         if (!(orgsRoleService.findUserRole(updaterId, orgID).equals(OrgRoles.owner))){
