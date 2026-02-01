@@ -1,5 +1,8 @@
-package com.zentra.zentra.api.user;
+package com.zentra.zentra.Api.User;
 
+import com.zentra.zentra.Api.User.Request.RegisterRequest;
+import com.zentra.zentra.Api.User.Request.UpdateUserRequest;
+import com.zentra.zentra.Api.User.Response.RegisterResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

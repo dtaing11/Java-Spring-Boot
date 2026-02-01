@@ -44,7 +44,7 @@ public class ProductSerivce {
     }
 
     public List<Product> findByOrgsId(UUID orgsId){
-        return productRepository.findByOrgsId(orgsId);
+        return productRepository.findByOrgId(orgsId);
     }
 
 

@@ -1,4 +1,4 @@
-package com.zentra.zentra.api.user;
+package com.zentra.zentra.Api.User.Request;
 
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package com.zentra.zentra.api.Orgs;
+package com.zentra.zentra.Api.Orgs.Request;
 
 import java.util.Optional;
 import java.util.UUID;

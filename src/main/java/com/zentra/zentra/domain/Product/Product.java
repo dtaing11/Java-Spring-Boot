@@ -16,6 +16,7 @@ public class Product {
 
     @Id
     @GeneratedValue
+    @Column(name="pd_id", nullable = false)
     private UUID id;
     @Column(name="pd_name", nullable = false)
     private String name;
@@ -26,20 +27,20 @@ public class Product {
     @Column (name = "created_by", nullable = false)
     private UUID createdBy;
     @Column (name = "org_id",  nullable = false)
-    private UUID orgID;
+    private UUID orgId;
 
-    public Product(String name, String description, UUID createdBy, UUID orgID) {
+    public Product(String name, String description, UUID createdBy, UUID orgId) {
         this.name = name;
         this.description = description;
         this.createdAt = OffsetDateTime.now();
         this.createdBy = createdBy;
-        this.orgID = orgID;
+        this.orgId = orgId;
     }
 
-    public Product(String name, UUID createdBy, UUID orgID) {
+    public Product(String name, UUID createdBy, UUID orgId) {
         this.name = name;
         this.createdAt = OffsetDateTime.now();
         this.createdBy = createdBy;
-        this.orgID = orgID;
+        this.orgId = orgId;
     }
 }

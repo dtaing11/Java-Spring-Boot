@@ -1,6 +1,6 @@
-package com.zentra.zentra.api.Orgs.roles;
+package com.zentra.zentra.Api.Orgs.Roles;
 
-import com.zentra.zentra.api.Orgs.roles.UpdateRequest;
+import com.zentra.zentra.Api.Orgs.Roles.Request.UpdateRequest;
 import com.zentra.zentra.domain.Orgs.roles.OrgsRoleService;
 import com.zentra.zentra.domain.Orgs.roles.Roles;
 import com.zentra.zentra.domain.User.User;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.management.relation.Role;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/orgs/roles")
@@ -35,4 +35,6 @@ public class RoleController {
         return ResponseEntity.ok("Updated Roles");
 
     }
+
+
 }

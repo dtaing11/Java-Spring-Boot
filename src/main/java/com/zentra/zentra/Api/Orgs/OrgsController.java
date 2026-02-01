@@ -1,5 +1,8 @@
-package com.zentra.zentra.api.Orgs;
+package com.zentra.zentra.Api.Orgs;
 
+import com.zentra.zentra.Api.Orgs.Request.CreateRequest;
+import com.zentra.zentra.Api.Orgs.Request.UpdateRequest;
+import com.zentra.zentra.Api.Orgs.Response.CreateResponse;
 import com.zentra.zentra.domain.Orgs.Orgs;
 import com.zentra.zentra.domain.Orgs.OrgsService;
 import com.zentra.zentra.domain.User.User;
@@ -8,7 +11,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
-import java.util.concurrent.Callable;
 
 @RestController()
 @RequestMapping("/orgs")
