@@ -23,7 +23,7 @@ public ProductController(ProductSerivce productSerivce) {
 
 
 @PostMapping("/create")
-public ResponseEntity<Product> create(@AuthenticationPrincipal User user, @RequestBody CreateRequest createRequest) {
+    public ResponseEntity<Product> create(@AuthenticationPrincipal User user, @RequestBody CreateRequest createRequest) {
     Product product = productSerivce.create(
             user.getId(),
             createRequest.name(),
@@ -45,7 +45,7 @@ public ResponseEntity<Product> create(@AuthenticationPrincipal User user, @Reque
     return ResponseEntity.ok("Product has been updated:" + product.getName());
 }
 
-@GetMapping("/{orgId}")
+@GetMapping("/find/{orgId}")
     public ResponseEntity<List<Product>> getProduct (@AuthenticationPrincipal User user, @PathVariable("orgId") UUID orgId) {
     List<Product> productList = productSerivce.findByOrgsId(user.getId(), orgId);
     return ResponseEntity.ok(productList);
