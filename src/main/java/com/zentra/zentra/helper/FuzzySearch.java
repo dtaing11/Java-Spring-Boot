@@ -44,6 +44,28 @@ public class FuzzySearch {
             quickSort(list,pi+1,high);
         }
     }
+
+    private static int levenshteinDistance(String a, String b) {
+        int n = a.length();
+        int m = b.length();
+
+        int[][] dp = new int[n + 1][m + 1];
+
+        for (int i = 0; i <= n; i++) dp[i][0] = i;
+        for (int j = 0; j <= m; j++) dp[0][j] = j;
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                int cost = (a.charAt(i - 1) == b.charAt(j - 1)) ? 0 : 1;
+
+                dp[i][j] = Math.min(
+                        Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1),
+                        dp[i - 1][j - 1] + cost
+                );
+            }
+        }
+        return dp[n][m];
+    }
     public static List<NameUUID> fuzzySearch (String query, List<NameUUID> nameUUIDS) {
         List<HashMap<NameUUID, Integer >> maps = new ArrayList<>();
 
@@ -74,28 +96,6 @@ public class FuzzySearch {
         return maps.stream()
                 .map(s->s.keySet().iterator().next())
                 .toList();
-    }
-
-    private static int levenshteinDistance(String a, String b) {
-        int n = a.length();
-        int m = b.length();
-
-        int[][] dp = new int[n + 1][m + 1];
-
-        for (int i = 0; i <= n; i++) dp[i][0] = i;
-        for (int j = 0; j <= m; j++) dp[0][j] = j;
-
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= m; j++) {
-                int cost = (a.charAt(i - 1) == b.charAt(j - 1)) ? 0 : 1;
-
-                dp[i][j] = Math.min(
-                        Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1),
-                        dp[i - 1][j - 1] + cost
-                );
-            }
-        }
-        return dp[n][m];
     }
 
 }

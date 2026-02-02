@@ -5,6 +5,7 @@ import com.zentra.zentra.Api.Posts.Request.CreateRequest;
 import com.zentra.zentra.domain.Post.Posts;
 import com.zentra.zentra.domain.Post.PostsService;
 import com.zentra.zentra.domain.User.User;
+import com.zentra.zentra.helper.NameUUID;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,6 @@ public class PostController {
                 request.description(),
                 request.orgId()
         );
-
         return ResponseEntity.ok(post);
     }
 
@@ -43,10 +43,6 @@ public class PostController {
     @GetMapping("/find/{orgId}")
     public ResponseEntity<List<Posts>> findAllByOrgId(@PathVariable("orgId") UUID orgId) {
         List<Posts> posts = postsService.findAllByOrgId(orgId);
-        if (posts == null || posts.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
         return ResponseEntity.ok(posts);
 
     }
@@ -54,10 +50,18 @@ public class PostController {
     @GetMapping("/find/{orgId}/{userId}")
     public ResponseEntity<List<Posts>> findAllbyUserIdAndOrgId(@PathVariable("orgId") UUID orgId, @PathVariable("userId") UUID userId) {
         List<Posts> posts = postsService.findAllByUserIdAndOrgId(userId, orgId);
-        if (posts == null || posts.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(posts);
+    }
+    @GetMapping("/find/id/{id}")
+    public ResponseEntity<Posts> findById(@PathVariable("id") UUID id) {
+        Posts post = postsService.findById(id);
+        return ResponseEntity.ok(post);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> findBySearch(@RequestParam ("search")String search){
+        List<NameUUID> result = postsService.findPostBySearch(search);
+        return ResponseEntity.ok(result);
     }
 
 }

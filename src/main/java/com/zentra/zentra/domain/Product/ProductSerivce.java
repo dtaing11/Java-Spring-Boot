@@ -52,6 +52,11 @@ public class ProductSerivce {
         orgsRoleService.findUserRole(userId, orgsId);
         return productRepository.findByOrgId(orgsId);
     }
+    public List<Product> findAll (){
+        return productRepository.findAll();
+    }
+
+
 
 
 }

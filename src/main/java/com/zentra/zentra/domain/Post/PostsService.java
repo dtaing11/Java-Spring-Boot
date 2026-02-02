@@ -4,6 +4,8 @@ package com.zentra.zentra.domain.Post;
 import com.zentra.zentra.domain.Orgs.roles.OrgRoles;
 import com.zentra.zentra.domain.Orgs.roles.OrgsRoleService;
 import com.zentra.zentra.domain.Orgs.roles.Roles;
+import com.zentra.zentra.helper.FuzzySearch;
+import com.zentra.zentra.helper.NameUUID;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.security.access.AccessDeniedException;
@@ -43,6 +45,25 @@ public class PostsService {
     public List<Posts> findAllByOrgId(UUID orgId) {
         return postsRepository.findAllByOrgId(orgId).orElse(null);
     }
+
+    public List<PostIdAndTitle> findAllPostIdAndTitle() {
+        return postsRepository.findAllPostIdAndTitle();
+    }
+
+    public List<NameUUID> findPostBySearch(String search) {
+        List<PostIdAndTitle> postIdAndTitles = findAllPostIdAndTitle();
+        List<NameUUID> nameUUIDS = List.of();
+
+        nameUUIDS = postIdAndTitles.stream()
+            .map(s-> new NameUUID(
+                    s.getPostTitle(),
+                    s.getPostId()
+            )).toList();
+        return FuzzySearch.fuzzySearch(search, nameUUIDS);
+    }
+
+
+
 
     @Transactional(rollbackOn = Exception.class)
     public void deleteById(UUID userId,UUID postId) {
