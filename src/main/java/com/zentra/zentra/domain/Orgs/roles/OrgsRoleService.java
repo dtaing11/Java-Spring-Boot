@@ -17,7 +17,7 @@ public class OrgsRoleService {
     }
 
     public OrgRoles findUserRole(UUID TargetId, UUID OrgId) {
-        Roles targetRole = orgRolesRepository.findById(TargetId).orElseThrow(()-> new AccessDeniedException("Target role not found"));
+        Roles targetRole = orgRolesRepository.findByUserIdAndOrgId(TargetId, OrgId).orElseThrow(()-> new AccessDeniedException("Target role not found"));
         return targetRole.getRoleName();
     }
     public Roles createRole(UUID user, OrgRoles roles, UUID orgId) {

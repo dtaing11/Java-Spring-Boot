@@ -30,15 +30,32 @@ public class OrgsService {
     }
 
 
+    @Transactional
     public Orgs updateOrgsService(UUID updaterId, UUID orgID, Optional<String> name, Optional<String> description){
-        Orgs orgs = orgsRepository.findById(orgID).orElseThrow(() -> new AccessDeniedException("Org not found"));
-        if (!(orgsRoleService.findUserRole(updaterId, orgID).equals(OrgRoles.owner))){
+        System.out.println("HIT service org ");
+        System.out.println(updaterId);
+
+        OrgRoles role;
+        try {
+            role = orgsRoleService.findUserRole(updaterId, orgID);
+            System.out.println("ROLE CHECK updaterId=" + updaterId + " orgID=" + orgID + " role=" + role);
+        } catch (Exception e) {
+            e.printStackTrace(); // <-- you NEED this right now
+            throw e;
+        }
+
+        Orgs orgs = orgsRepository.findById(orgID)
+                .orElseThrow(() -> new AccessDeniedException("Org not found"));
+
+        if (role != OrgRoles.owner) {
             throw new AccessDeniedException("Only owner can update orgs information");
         }
+
         name.ifPresent(orgs::setName);
         description.ifPresent(orgs::setDescription);
         return orgsRepository.save(orgs);
     }
+
     @Transactional
     public Orgs createOrgsService(UUID userId, String name, Optional<String> description ) {
         String descriptions = description.orElse(null);

@@ -46,6 +46,8 @@ public class OrgsController{
 
     @PutMapping("/update")
     public ResponseEntity<?> update(@AuthenticationPrincipal User user, @RequestBody UpdateRequest req) {
+        System.out.println("HIT update org controller");
+
         Orgs orgs =  orgsService.updateOrgsService(
                 user.getId(),
                 req.orgId(),

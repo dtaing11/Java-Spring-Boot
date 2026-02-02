@@ -29,10 +29,9 @@ public class UserService  {
      u.setLastName(last_name);
      u.setEmail(normalizedEmail);
      u.setPasswordHash(passwordEncoder.encode(password));
-    if (phoneNumber.isPresent()) {
-     u.setPhoneNumber(phoneNumber.toString());
-    }
-    return userRepository.save(u);
+     phoneNumber.ifPresent(u::setPhoneNumber);
+      System.out.println("ENTITY phoneNumber = [" +u.getPhoneNumber() + "]");
+      return userRepository.save(u);
   }
 
   public User getById(UUID userId) {

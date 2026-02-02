@@ -1,6 +1,7 @@
 package com.zentra.zentra.domain.Orgs.roles;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -13,6 +14,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Table(name="org_roles")
+@AllArgsConstructor
 public class Roles {
 
     @Id
@@ -29,7 +31,7 @@ public class Roles {
     private UUID orgId;
     @Column(name= "updated_at")
     private OffsetDateTime updateAt;
-    
+    protected Roles() {}
     public Roles(OrgRoles roleName, UUID userId, UUID orgId) {
         this.roleName = roleName;
         this.userId = userId;

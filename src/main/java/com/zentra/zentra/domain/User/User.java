@@ -34,7 +34,6 @@ public class User {
     @Column(name = "created_at", nullable = false, updatable = false)
     private OffsetDateTime createdAt;
 
-    protected User(){}
 
     public User(String firstName, String lastName, String email, String passwordHash, String phoneNumber) {
         this.firstName = firstName;
@@ -42,11 +41,17 @@ public class User {
         this.email = email;
         this.passwordHash = passwordHash;
         this.phoneNumber = phoneNumber;
+        this.createdAt = OffsetDateTime.now();
     }
     public User(String firstName, String lastName, String email, String passwordHash) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.passwordHash = passwordHash;
+        this.createdAt = OffsetDateTime.now();
+    }
+
+    public User() {
+        this.createdAt = OffsetDateTime.now();
     }
 }

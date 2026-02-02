@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/EmailList")
+@RequestMapping("/emaillist")
 public class EmailListController {
     @Autowired
     private final EmailListService emailListService;

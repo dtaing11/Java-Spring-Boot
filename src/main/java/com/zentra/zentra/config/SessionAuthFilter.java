@@ -32,6 +32,7 @@ public class SessionAuthFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }catch (Exception e) {
                 // ignored
+                System.out.println("AUTH FAILED: " + e.getMessage());
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 response.setContentType("application/json");
                 response.getWriter().write("{\"error\":\"Unauthorized\"}");

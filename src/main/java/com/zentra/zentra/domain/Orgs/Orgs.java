@@ -2,6 +2,7 @@ package com.zentra.zentra.domain.Orgs;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +13,7 @@ import java.util.UUID;
 @Table(name="orgs")
 @Getter
 @Setter
-
+@AllArgsConstructor
 public class Orgs {
 
     @Id
@@ -27,6 +28,8 @@ public class Orgs {
     private OffsetDateTime createdAt;
 
 
+    protected Orgs(){
+    }
     public Orgs (String name, String description, OffsetDateTime createdAt) {
         this.name = name;
         this.description = description;

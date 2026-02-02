@@ -41,7 +41,7 @@ public class PostsService {
         return postsRepository.findAllByOrgIdAndUserId(orgId, userId).orElse(null);
     }
     public List<Posts> findAllByOrgId(UUID orgId) {
-        return postsRepository.finaAllByOrgId(orgId).orElse(null);
+        return postsRepository.findAllByOrgId(orgId).orElse(null);
     }
 
     @Transactional(rollbackOn = Exception.class)

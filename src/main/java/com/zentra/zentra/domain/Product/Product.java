@@ -2,6 +2,7 @@ package com.zentra.zentra.domain.Product;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Table(name = "products")
+@AllArgsConstructor
 public class Product {
 
     @Id
