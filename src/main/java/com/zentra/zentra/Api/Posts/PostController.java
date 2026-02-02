@@ -32,6 +32,14 @@ public class PostController {
         return ResponseEntity.ok(post);
     }
 
+    @DeleteMapping("/delete/{postId}")
+    public ResponseEntity<?> deleteById(@AuthenticationPrincipal User user, @PathVariable UUID postId) {
+        postsService.deleteById(
+                user.getId(),
+                postId
+        );
+        return ResponseEntity.ok().build();
+    }
     @GetMapping("/find/{orgId}")
     public ResponseEntity<List<Posts>> findAllByOrgId(@PathVariable("orgId") UUID orgId) {
         List<Posts> posts = postsService.findAllByOrgId(orgId);

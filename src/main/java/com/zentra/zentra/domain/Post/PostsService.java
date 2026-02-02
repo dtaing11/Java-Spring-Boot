@@ -1,8 +1,12 @@
 package com.zentra.zentra.domain.Post;
 
 
+import com.zentra.zentra.domain.Orgs.roles.OrgRoles;
 import com.zentra.zentra.domain.Orgs.roles.OrgsRoleService;
+import com.zentra.zentra.domain.Orgs.roles.Roles;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,6 +42,20 @@ public class PostsService {
     }
     public List<Posts> findAllByOrgId(UUID orgId) {
         return postsRepository.finaAllByOrgId(orgId).orElse(null);
+    }
+
+    @Transactional(rollbackOn = Exception.class)
+    public void deleteById(UUID userId,UUID postId) {
+        Posts posts = postsRepository.findById(postId).orElseThrow(()-> new EntityNotFoundException("Posts not found"));
+        if(posts.getId().equals(userId)) {
+            postsRepository.delete(posts);
+        }
+        if(orgsRoleService.findUserRole(userId, posts.getOrgId()).equals(OrgRoles.owner) || orgsRoleService.findUserRole(userId, posts.getOrgId()).equals(OrgRoles.admin)) {
+            postsRepository.delete(posts);
+        }
+        else {
+            throw new AccessDeniedException("You are not allowed to delete this post");
+        }
     }
 
 
