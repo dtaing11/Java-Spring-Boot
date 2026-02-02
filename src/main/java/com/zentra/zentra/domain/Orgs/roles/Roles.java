@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.Type;
 import org.hibernate.type.SqlTypes;
 
 import java.time.OffsetDateTime;
@@ -28,7 +27,7 @@ public class Roles {
     private UUID userId;
     @Column(name= "org_id", nullable = false)
     private UUID orgId;
-    @Column(name= "update_at")
+    @Column(name= "updated_at")
     private OffsetDateTime updateAt;
     
     public Roles(OrgRoles roleName, UUID userId, UUID orgId) {

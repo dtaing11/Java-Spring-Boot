@@ -43,7 +43,13 @@ public class ProductSerivce {
         return productRepository.save(pd);
     }
 
-    public List<Product> findByOrgsId(UUID orgsId){
+    public Product findById(UUID pd_id){
+        return productRepository.findById(pd_id).orElseThrow(() -> new IllegalArgumentException("Product not found"));
+    }
+
+    @Transactional
+    public List<Product> findByOrgsId(UUID userId,UUID orgsId){
+        orgsRoleService.findUserRole(userId, orgsId);
         return productRepository.findByOrgId(orgsId);
     }
 

@@ -1,4 +1,10 @@
 package com.zentra.zentra.Api.EmailList.Request;
 
-public class SignUpRequest {
+import java.util.UUID;
+
+public record SignUpRequest
+        (
+                String email,
+                UUID pdId
+        ){
 }

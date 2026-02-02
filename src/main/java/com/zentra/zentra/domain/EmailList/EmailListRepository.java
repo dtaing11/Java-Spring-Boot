@@ -19,5 +19,8 @@ public interface EmailListRepository extends JpaRepository<EmailList, UUID> {
     """)
     void deleteByPdIdAndUserId(UUID pdId, UUID userId);
 
+
+
+    //Find by Product
     Optional<List<EmailList>> findByPdId(UUID pdId);
 }

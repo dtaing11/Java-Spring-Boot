@@ -23,8 +23,8 @@ public class OrgsController{
         this.orgsService = orgsService;
     }
 
-    @GetMapping("/{org_id}")
-    public ResponseEntity<Orgs> getOrgById(@PathVariable("org_id") UUID orgId){
+    @GetMapping("/{orgId}")
+    public ResponseEntity<Orgs> getOrgById(@PathVariable("orgId") UUID orgId){
         Orgs org = orgsService.findById(orgId);
         return ResponseEntity.ok(org);
     }
